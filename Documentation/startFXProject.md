@@ -2,7 +2,8 @@
 
 ## Main Reference: https://openjfx.io/openjfx-docs//index.html#maven
 
-# Terminal Cmd:
+---
+## Terminal Cmd:
 - Run this command inside the folder where you want your project to be. This cmd will create a folder for the project.
 
 ```cmd
@@ -16,7 +17,8 @@ mvn archetype:generate \
         -Djavafx-version=17
 ```
 
-# pom.xml
+---
+## pom.xml
 - Add javafx.version to properties in pom files to keep the version of all javafx components consistent over the project.
 - The other two are basic dependencies for JavaFX project
 
@@ -82,9 +84,29 @@ mvn archetype:generate \
 </project>
 ```
 
+- To be able to load fxml files from src/main, add this to include src/main/java as a resource folder:
+```xml
+<project>
+    <build>
+        <resources>
+          <resource>
+            <filtering>false</filtering>
+            <directory>src/main/Java</directory>
+            <includes>
+              <include>**/*.fxml</include>
+            </includes>
+          </resource>
+        </resources>
+        ...
+    </build>
+    ...
+</project>
+```
+---
 ## Running: 
 - To run a javaFX project, using javafx:run from maven plugin
 
+---
 ## Debug
 - Add a remote configuration that connect to localhost with port set in debug part of the pom.xml
 - To debug a javaFX project:
@@ -95,10 +117,12 @@ mvn archetype:generate \
 - https://stackoverflow.com/questions/56197372/i-cant-debug-an-application-using-netbeans-11-with-javafx-12
 - https://www.jetbrains.com/help/idea/tutorial-remote-debug.html#78a65992
 
+---
 ## Extra reference
 - https://stackoverflow.com/questions/30488223/how-to-create-a-javafx-maven-project-in-intellij-idea
 - https://edencoding.com/javafx-maven/
 
+---
 ## Another way of working with javaFX
 - Create a normal Maven project
 - Download javaFX SDK

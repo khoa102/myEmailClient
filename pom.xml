@@ -23,6 +23,15 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/Java</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
