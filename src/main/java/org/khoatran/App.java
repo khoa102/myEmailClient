@@ -25,7 +25,7 @@ public class App extends Application {
         StackPane stackPane = new StackPane(label);
 
 //        System.out.println(getClass().getResource("/view/first.fxml"));
-        URL firstSceneUrl = getClass().getResource("/org/khoatran/first/first.fxml");
+        URL firstSceneUrl = getClass().getResource("/org/khoatran/loginWindow/LoginWindow.fxml");
 
         Parent parent;
         if (firstSceneUrl != null)
@@ -33,7 +33,7 @@ public class App extends Application {
         else
             parent = stackPane;
 
-        var scene = new Scene(parent, 640, 480);
+        var scene = new Scene(parent, 510, 325);
         stage.setScene(scene);
         stage.show();
     }
