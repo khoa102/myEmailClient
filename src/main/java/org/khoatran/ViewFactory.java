@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.khoatran.loginWindow.LoginWindowController;
+import org.khoatran.mainWindow.MainWindowController;
 
 import java.io.IOException;
 
@@ -24,6 +26,11 @@ public class ViewFactory {
     public void showMainWindow() {
         System.out.println("Show Main Window Called");
         initializeStage("/org/khoatran/mainWindow/MainWindow.fxml");
+    }
+
+    public void showOptionWindow() {
+        System.out.println("Show Option Window Called");
+        initializeStage("/org/khoatran/optionWindow/OptionWindow.fxml");
     }
 
     public void initializeStage(String fxmlName) {
@@ -57,7 +64,9 @@ public class ViewFactory {
 
         Parent parent;
         try {
+            long start = System.currentTimeMillis();
             parent = fxmlLoader.load();
+            System.out.println("fmxlLoader load: " + (System.currentTimeMillis() - start));
         } catch (IOException e) {
             e.printStackTrace();
             return;
