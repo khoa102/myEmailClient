@@ -2,8 +2,11 @@ package org.khoatran.loginWindow;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import org.khoatran.BaseController;
+import org.khoatran.EmailManager;
+import org.khoatran.ViewFactory;
 
-public class LoginWindowController {
+public class LoginWindowController extends BaseController {
 
     @FXML
     private Label emailAddressField;
@@ -13,6 +16,10 @@ public class LoginWindowController {
 
     @FXML
     private Label passwordField;
+
+    public LoginWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
+        super(emailManager, viewFactory, fxmlName);
+    }
 
     @FXML
     void loginButtonAction() {
