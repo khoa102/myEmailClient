@@ -2,6 +2,7 @@ package org.khoatran.loginWindow;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.khoatran.BaseController;
 import org.khoatran.EmailManager;
 import org.khoatran.ViewFactory;
@@ -23,7 +24,10 @@ public class LoginWindowController extends BaseController {
 
     @FXML
     void loginButtonAction() {
-        System.out.println("Click Login!");
+        System.out.println("loginButtonAction!!!");
+        viewFactory.showMainWindow();
+        Stage stage = (Stage) errorLabel.getScene().getWindow();
+        viewFactory.closeStage(stage);
     }
 
 }

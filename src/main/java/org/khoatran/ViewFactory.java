@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.khoatran.loginWindow.LoginWindowController;
 
 import java.io.IOException;
 
@@ -18,9 +17,17 @@ public class ViewFactory {
     }
 
     public void showLoginWindow() {
-//        URL firstSceneUrl = getClass().getResource("/org/khoatran/mainWindow/MainWindow.fxml");
-        BaseController controller = new LoginWindowController(emailManager, this, "/org/khoatran/loginWindow/LoginWindow.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
+        System.out.println("Show Login Window Called");
+        initializeStage("/org/khoatran/loginWindow/LoginWindow.fxml");
+    }
+
+    public void showMainWindow() {
+        System.out.println("Show Main Window Called");
+        initializeStage("/org/khoatran/mainWindow/MainWindow.fxml");
+    }
+
+    public void initializeStage(String fxmlName) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
 
         // This is used to customize the creation of controller injected by javaFX when defining them with fx:controller attribute inside FXML files
         // Using the controller factory instead of setting the controller directly with fxmlLoader.setController() allows us to keep the fx:controller
@@ -29,7 +36,12 @@ public class ViewFactory {
             // Any controller that needs custom constructor behavior needs to be defined above this check
             if (BaseController.class.isAssignableFrom(type)) {
                 // A default behavior for controllerFactory for all classes extends from base controller.
-                return controller ;
+                try {
+                    return type.getDeclaredConstructor(EmailManager.class, ViewFactory.class, String.class).newInstance(emailManager, this, fxmlName);
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                    throw new RuntimeException(exc); // fatal, just bail...
+                }
             } else {
                 // default behavior for controllerFactory:
                 try {
@@ -55,5 +67,9 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void closeStage(Stage stageToClose) {
+        stageToClose.close();
     }
 }
