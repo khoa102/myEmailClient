@@ -7,7 +7,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.web.WebView;
 import org.khoatran.BaseController;
 import org.khoatran.EmailManager;
-import org.khoatran.ViewFactory;
+import org.khoatran.ViewManager;
 
 public class MainWindowController extends BaseController {
 
@@ -20,13 +20,13 @@ public class MainWindowController extends BaseController {
     @FXML
     private TreeView<?> emailsTreeView;
 
-    public MainWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
-        super(emailManager, viewFactory, fxmlName);
+    public MainWindowController(EmailManager emailManager, ViewManager viewManager, String fxmlName) {
+        super(emailManager, viewManager, fxmlName);
     }
 
     @FXML
     void optionAction(ActionEvent event) {
-        viewFactory.showOptionWindow();
+        viewManager.showOptionWindow();
     }
 
 }

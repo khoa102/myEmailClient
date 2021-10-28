@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.khoatran.BaseController;
 import org.khoatran.EmailManager;
-import org.khoatran.ViewFactory;
+import org.khoatran.ViewManager;
 
 public class LoginWindowController extends BaseController {
 
@@ -18,16 +18,16 @@ public class LoginWindowController extends BaseController {
     @FXML
     private Label passwordField;
 
-    public LoginWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
-        super(emailManager, viewFactory, fxmlName);
+    public LoginWindowController(EmailManager emailManager, ViewManager viewManager, String fxmlName) {
+        super(emailManager, viewManager, fxmlName);
     }
 
     @FXML
     void loginButtonAction() {
         System.out.println("loginButtonAction!!!");
-        viewFactory.showMainWindow();
+        viewManager.showMainWindow();
         Stage stage = (Stage) errorLabel.getScene().getWindow();
-        viewFactory.closeStage(stage);
+        viewManager.closeStage(stage);
     }
 
 }

@@ -2,15 +2,15 @@ package org.khoatran;
 
 public abstract class BaseController {
     // Required for all application
-    protected ViewFactory viewFactory;
+    protected ViewManager viewManager;
     private final String fxmlName;
 
     // Application dependencies
     protected EmailManager emailManager;
 
-    public BaseController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
+    public BaseController(EmailManager emailManager, ViewManager viewManager, String fxmlName) {
         this.emailManager = emailManager;
-        this.viewFactory = viewFactory;
+        this.viewManager = viewManager;
         this.fxmlName = fxmlName;
     }
 

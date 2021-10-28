@@ -10,8 +10,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        ViewFactory viewFactory = new ViewFactory(new EmailManager());
-        viewFactory.showLoginWindow();
+        ViewManager viewManager = new ViewManager(new EmailManager());
+        viewManager.showLoginWindow();
     }
 
     public static void main(String[] args) {

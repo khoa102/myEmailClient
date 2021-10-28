@@ -6,7 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import org.khoatran.BaseController;
 import org.khoatran.EmailManager;
-import org.khoatran.ViewFactory;
+import org.khoatran.ViewManager;
 
 public class OptionWindow extends BaseController {
 
@@ -16,8 +16,8 @@ public class OptionWindow extends BaseController {
     @FXML
     private ChoiceBox<?> themePicker;
 
-    public OptionWindow(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
-        super(emailManager, viewFactory, fxmlName);
+    public OptionWindow(EmailManager emailManager, ViewManager viewManager, String fxmlName) {
+        super(emailManager, viewManager, fxmlName);
     }
 
     @FXML

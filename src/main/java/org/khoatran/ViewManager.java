@@ -3,38 +3,41 @@ package org.khoatran;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.khoatran.loginWindow.LoginWindowController;
-import org.khoatran.mainWindow.MainWindowController;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ViewFactory {
+public class ViewManager {
 
     private EmailManager emailManager;
 
-    public ViewFactory(EmailManager emailManager) {
+    private final Map<View, Parent> cachedView = new HashMap<>();
+
+    public ViewManager(EmailManager emailManager) {
         this.emailManager = emailManager;
     }
 
     public void showLoginWindow() {
         System.out.println("Show Login Window Called");
-        initializeStage("/org/khoatran/loginWindow/LoginWindow.fxml");
+        initializeStage(View.LOGIN);
     }
 
     public void showMainWindow() {
         System.out.println("Show Main Window Called");
-        initializeStage("/org/khoatran/mainWindow/MainWindow.fxml");
+        initializeStage(View.MAIN);
     }
 
     public void showOptionWindow() {
         System.out.println("Show Option Window Called");
-        initializeStage("/org/khoatran/optionWindow/OptionWindow.fxml");
+        initializeStage(View.OPTION);
     }
 
-    public void initializeStage(String fxmlName) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
+    public void initializeStage(View view) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(view.getFxmlPath()));
 
         // This is used to customize the creation of controller injected by javaFX when defining them with fx:controller attribute inside FXML files
         // Using the controller factory instead of setting the controller directly with fxmlLoader.setController() allows us to keep the fx:controller
@@ -44,7 +47,7 @@ public class ViewFactory {
             if (BaseController.class.isAssignableFrom(type)) {
                 // A default behavior for controllerFactory for all classes extends from base controller.
                 try {
-                    return type.getDeclaredConstructor(EmailManager.class, ViewFactory.class, String.class).newInstance(emailManager, this, fxmlName);
+                    return type.getDeclaredConstructor(EmailManager.class, ViewManager.class, String.class).newInstance(emailManager, this, view.getFxmlPath());
                 } catch (Exception exc) {
                     exc.printStackTrace();
                     throw new RuntimeException(exc); // fatal, just bail...
@@ -65,14 +68,27 @@ public class ViewFactory {
         Parent parent;
         try {
             long start = System.currentTimeMillis();
-            parent = fxmlLoader.load();
+            if (cachedView.containsKey(view)) {
+                System.out.println("Loading from cache");
+                parent = cachedView.get(view);
+            } else {
+                System.out.println("Loading from FXML");
+                parent = fxmlLoader.load();
+                cachedView.put(view, parent);
+            }
             System.out.println("fmxlLoader load: " + (System.currentTimeMillis() - start));
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
 
-        Scene scene = new Scene(parent);
+        // Create a new Pane to serve as the root node because a Node can only be set as a root of one scene.
+        // If the Parent that is loaded from FXML is set as the root node, we cannot reopen that window after the first time. This is because we create a new scene
+        // every time and reuse the Parent as root multiple times.
+        Pane root = new Pane();
+        root.getChildren().add(parent);
+
+        Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
