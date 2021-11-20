@@ -37,6 +37,47 @@ public class ViewManager {
     }
 
     public void initializeStage(View view) {
+        Parent parent = getView(view);
+
+        if (parent != null) {
+            // Create a new Pane to serve as the root node because a Node can only be set as a root of one scene.
+            // If the Parent that is loaded from FXML is set as the root node, we cannot reopen that window after the first time. This is because we create a new scene
+            // every time and reuse the Parent as root multiple times.
+            Pane root = new Pane();
+            root.getChildren().add(parent);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+
+    public void closeStage(Stage stageToClose) {
+        stageToClose.close();
+    }
+
+    private Parent getView(View view) {
+        Parent parent;
+        try {
+            long start = System.currentTimeMillis();
+            if (cachedView.containsKey(view)) {
+                System.out.println("Loading from cache");
+                parent = cachedView.get(view);
+            } else {
+                System.out.println("Loading from FXML");
+                parent = loadViewFromFXML(view);
+                cachedView.put(view, parent);
+            }
+            System.out.println("fmxlLoader load: " + (System.currentTimeMillis() - start));
+            return parent;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Parent loadViewFromFXML(View view) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(view.getFxmlPath()));
 
         // This is used to customize the creation of controller injected by javaFX when defining them with fx:controller attribute inside FXML files
@@ -64,37 +105,6 @@ public class ViewManager {
         };
 
         fxmlLoader.setControllerFactory(controllerFactory);
-
-        Parent parent;
-        try {
-            long start = System.currentTimeMillis();
-            if (cachedView.containsKey(view)) {
-                System.out.println("Loading from cache");
-                parent = cachedView.get(view);
-            } else {
-                System.out.println("Loading from FXML");
-                parent = fxmlLoader.load();
-                cachedView.put(view, parent);
-            }
-            System.out.println("fmxlLoader load: " + (System.currentTimeMillis() - start));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        // Create a new Pane to serve as the root node because a Node can only be set as a root of one scene.
-        // If the Parent that is loaded from FXML is set as the root node, we cannot reopen that window after the first time. This is because we create a new scene
-        // every time and reuse the Parent as root multiple times.
-        Pane root = new Pane();
-        root.getChildren().add(parent);
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void closeStage(Stage stageToClose) {
-        stageToClose.close();
+        return fxmlLoader.load();
     }
 }
