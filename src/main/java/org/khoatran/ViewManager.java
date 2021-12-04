@@ -3,7 +3,7 @@ package org.khoatran;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.khoatran.optionWindow.ColorTheme;
@@ -49,8 +49,13 @@ public class ViewManager {
             // Create a new Pane to serve as the root node because a Node can only be set as a root of one scene.
             // If the Parent that is loaded from FXML is set as the root node, we cannot reopen that window after the first time. This is because we create a new scene
             // every time and reuse the Parent as root multiple times.
-            Pane root = new Pane();
+            // Use anchorPane and anchor the parent node to the four side of the root node to make sure the parent node is stretch with the root node
+            AnchorPane root = new AnchorPane();
             root.getChildren().add(parent);
+            AnchorPane.setTopAnchor(parent, 0d);
+            AnchorPane.setBottomAnchor(parent, 0d);
+            AnchorPane.setLeftAnchor(parent, 0d);
+            AnchorPane.setRightAnchor(parent, 0d);
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
