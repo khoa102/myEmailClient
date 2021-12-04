@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.khoatran.optionWindow.ColorTheme;
+import org.khoatran.optionWindow.FontSize;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -106,5 +108,25 @@ public class ViewManager {
 
         fxmlLoader.setControllerFactory(controllerFactory);
         return fxmlLoader.load();
+    }
+
+    // View option handling
+    private ColorTheme colorTheme = ColorTheme.DEFAULT;
+    private FontSize fontSize = FontSize.MEDIUM;
+
+    public ColorTheme getColorTheme() {
+        return colorTheme;
+    }
+
+    public void setColorTheme(ColorTheme colorTheme) {
+        this.colorTheme = colorTheme;
+    }
+
+    public FontSize getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(FontSize fontSize) {
+        this.fontSize = fontSize;
     }
 }
