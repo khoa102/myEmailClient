@@ -1,4 +1,4 @@
-package org.khoatran.optionWindow;
+package org.khoatran.myEmailClient.optionWindow;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -7,9 +7,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import org.khoatran.BaseController;
-import org.khoatran.EmailManager;
-import org.khoatran.ViewManager;
+import org.khoatran.myEmailClient.BaseController;
+import org.khoatran.myEmailClient.EmailManager;
+import org.khoatran.myEmailClient.ViewManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,11 +1,11 @@
-package org.khoatran.loginWindow;
+package org.khoatran.myEmailClient.loginWindow;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.khoatran.BaseController;
-import org.khoatran.EmailManager;
-import org.khoatran.ViewManager;
+import org.khoatran.myEmailClient.BaseController;
+import org.khoatran.myEmailClient.EmailManager;
+import org.khoatran.myEmailClient.ViewManager;
 
 public class LoginWindowController extends BaseController {
 

@@ -1,13 +1,12 @@
-package org.khoatran.mainWindow;
+package org.khoatran.myEmailClient.mainWindow;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeView;
 import javafx.scene.web.WebView;
-import org.khoatran.BaseController;
-import org.khoatran.EmailManager;
-import org.khoatran.ViewManager;
+import org.khoatran.myEmailClient.BaseController;
+import org.khoatran.myEmailClient.EmailManager;
+import org.khoatran.myEmailClient.ViewManager;
 
 public class MainWindowController extends BaseController {
 

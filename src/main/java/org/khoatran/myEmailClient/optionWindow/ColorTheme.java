@@ -1,4 +1,4 @@
-package org.khoatran.optionWindow;
+package org.khoatran.myEmailClient.optionWindow;
 
 public enum ColorTheme {
     LIGHT("/stylesheets/themes/themeLight.css"),

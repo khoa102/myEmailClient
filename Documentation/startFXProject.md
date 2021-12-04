@@ -45,42 +45,42 @@ mvn archetype:generate \
 - To run and debug project, make sure pom.xml contains the following
 ```xml
 <project>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
-                <executions>
-                    <execution>
-                        <!-- Default configuration for running -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>org.khoatran.App</mainClass>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <!-- Configuration for debugging -->
-                        <id>debug</id>
-                        <configuration>
-                            <options>
-                                <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000</option>
-                            </options>
-                            <mainClass>org.khoatran.App</mainClass>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <executions>
+          <execution>
+            <!-- Default configuration for running -->
+            <id>default-cli</id>
+            <configuration>
+              <mainClass>org.khoatran.myEmailClient.App</mainClass>
+            </configuration>
+          </execution>
+          <execution>
+            <!-- Configuration for debugging -->
+            <id>debug</id>
+            <configuration>
+              <options>
+                <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000</option>
+              </options>
+              <mainClass>org.khoatran.myEmailClient.App</mainClass>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
 ```
 
@@ -112,6 +112,8 @@ mvn archetype:generate \
 - To debug a javaFX project:
     - Run the program using cmd: mvn clean javafx:run@debug
     - Debug the program remotely using the configuration added earlier
+      - host: localhost
+      - port: the port that is set in debug part of the pom.xml (e.g: port is 8000 if address=*:8000)
 
 ### Debug Reference
 - https://stackoverflow.com/questions/56197372/i-cant-debug-an-application-using-netbeans-11-with-javafx-12

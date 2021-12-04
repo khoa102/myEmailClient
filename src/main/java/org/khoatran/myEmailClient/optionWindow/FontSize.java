@@ -1,4 +1,4 @@
-package org.khoatran.optionWindow;
+package org.khoatran.myEmailClient.optionWindow;
 
 public enum FontSize {
     SMALL("/stylesheets/fonts/fontSmall.css"),

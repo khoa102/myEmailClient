@@ -1,4 +1,4 @@
-package org.khoatran;
+package org.khoatran.myEmailClient;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -6,8 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.khoatran.optionWindow.ColorTheme;
-import org.khoatran.optionWindow.FontSize;
+import org.khoatran.myEmailClient.optionWindow.ColorTheme;
+import org.khoatran.myEmailClient.optionWindow.FontSize;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -58,7 +58,7 @@
                         <!-- Default configuration for running -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.khoatran.App</mainClass>
+                            <mainClass>org.khoatran.myEmailClient.App</mainClass>
                         </configuration>
                     </execution>
                     <execution>
@@ -68,7 +68,7 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:8000</option>
                             </options>
-                            <mainClass>org.khoatran.App</mainClass>
+                            <mainClass>org.khoatran.myEmailClient.App</mainClass>
                         </configuration>
                     </execution>
                 </executions>

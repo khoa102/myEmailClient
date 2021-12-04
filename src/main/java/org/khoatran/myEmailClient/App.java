@@ -1,4 +1,4 @@
-package org.khoatran;
+package org.khoatran.myEmailClient;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

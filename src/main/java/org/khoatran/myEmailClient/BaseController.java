@@ -1,4 +1,4 @@
-package org.khoatran;
+package org.khoatran.myEmailClient;
 
 public abstract class BaseController {
     // Required for all application
