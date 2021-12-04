@@ -10,7 +10,9 @@ import org.khoatran.optionWindow.ColorTheme;
 import org.khoatran.optionWindow.FontSize;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ViewManager {
@@ -18,9 +20,11 @@ public class ViewManager {
     private EmailManager emailManager;
 
     private final Map<View, Parent> cachedView = new HashMap<>();
+    private final List<Stage> activeStages;
 
     public ViewManager(EmailManager emailManager) {
         this.emailManager = emailManager;
+        activeStages = new ArrayList<>();
     }
 
     public void showLoginWindow() {
@@ -52,11 +56,13 @@ public class ViewManager {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+            activeStages.add(stage);
         }
     }
 
     public void closeStage(Stage stageToClose) {
         stageToClose.close();
+        activeStages.remove(stageToClose);
     }
 
     private Parent getView(View view) {
@@ -128,5 +134,17 @@ public class ViewManager {
 
     public void setFontSize(FontSize fontSize) {
         this.fontSize = fontSize;
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void updateStyles() {
+        for (Stage stage : activeStages) {
+            Scene scene = stage.getScene();
+            // handle the css
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource(colorTheme.getCssPath()).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(fontSize.getCssPath()).toExternalForm());
+
+        }
     }
 }

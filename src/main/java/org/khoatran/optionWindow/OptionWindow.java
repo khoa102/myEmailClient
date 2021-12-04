@@ -1,11 +1,11 @@
 package org.khoatran.optionWindow;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.khoatran.BaseController;
 import org.khoatran.EmailManager;
@@ -27,13 +27,16 @@ public class OptionWindow extends BaseController implements Initializable {
     }
 
     @FXML
-    void applyButtonAction(ActionEvent event) {
-
+    void applyButtonAction() {
+        viewManager.setColorTheme(themePicker.getValue());
+        viewManager.setFontSize(FontSize.values()[(int)fontSizePicker.getValue()]);
+        viewManager.updateStyles();
     }
 
     @FXML
-    void cancelButtonAction(ActionEvent event) {
-
+    void cancelButtonAction() {
+        Stage stage = (Stage) themePicker.getScene().getWindow();
+        viewManager.closeStage(stage);
     }
 
     @Override
