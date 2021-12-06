@@ -4,8 +4,8 @@ import javax.mail.Store;
 import java.util.Properties;
 
 public class EmailAccount {
-    private String address;
-    private String password;
+    private final String address;
+    private final String password;
     private Properties properties; // hold email configuration
     private Store store; // models a message store and its access protocol, for storing and retrieving messages.
 
